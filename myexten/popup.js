@@ -26,9 +26,7 @@ for (var i = 0; i < data.length; i++) { // the plainest of array loops
   // for..in object iteration will set the key for each pair
   // and the value is in obj[key]
   for (var key in obj) { 
-  	console.log(JSON.stringify(data));
-    console.log(key, obj[key]);
-
+    	console.log(key, obj[key]);
   }
 }
 
