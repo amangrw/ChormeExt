@@ -1,0 +1,48 @@
+  <!DOCTYPE html>
+  <html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>All Logs</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+      <script src="popup.js"></script>
+      <title>Open Extension</title>
+      <style type="text/css">
+      	*{
+      		font-size: 12px;
+      		color: grey;
+      	}
+        table tbody tr td{
+          width: 50%;
+          word-wrap: break-word;
+          border-bottom: 1px solid lightgrey;
+          padding: 7px;
+        }
+        .urls{
+          max-width: 600px;
+          white-space: nowrap;
+		  overflow: hidden;
+		  text-overflow: ellipsis;
+        }
+
+      </style>
+    </head>
+    <body>
+        <div class="container">
+          <table id="IsOutput">
+          	<thead>
+          		<tr>
+          			<th></th>
+          			<th>Time</th>
+          			<th>urls</th>
+          		</tr>
+          	</thead>
+          </table>
+        </div>
+        
+    </body>
+  </html>
