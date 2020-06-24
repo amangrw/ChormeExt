@@ -10,14 +10,15 @@ chrome.runtime.onInstalled.addListener(function() {
 		        if (change.url) {
 			        let currentDateTime = Date();
 			        let currentUrl = change.url;
-	                localStorage.setItem(currentDateTime , currentUrl);
-		        }
-		        var counts = {};
+	                	localStorage.setItem(currentDateTime , currentUrl);
+			        var counts = {};
 				for (var i = 0; i < all_url.length; i++) {
-				  var num = arr[i];
-				  counts[num] = counts[num] ? counts[num] + 1 : 1;
-				}
+				    var num = all_url[i];
+				    counts[num] = counts[num] ? counts[num] + 1 : 1;
+				};
+				alert(counts[currentUrl]);
 				console.log(counts[currentUrl]);
+		        }
 		    });
 		}); 
  });
@@ -29,10 +30,10 @@ chrome.runtime.onInstalled.addListener(function() {
 	};
 });
 
-function setValue(currentUrl){
-	globalcurrentUrl = currentUrl ;
-	console.log(globalcurrentUrl);
-}
+// function setValue(currentUrl){
+// 	globalcurrentUrl = currentUrl ;
+// 	console.log(globalcurrentUrl);
+// };
 
 //showing the whole data from localStorage 
 document.addEventListener('DOMContentLoaded', function() {
