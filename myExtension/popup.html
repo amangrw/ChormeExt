@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html ng-app="myExtension" ng-csp>
+    <head>
+        <style type="text/css">
+        *{
+          font-size: 13px;
+        }
+        a{
+          padding: 7px 10px;  
+          text-decoration: none;
+          background-image: linear-gradient(to right, #cb4eff , #6242e8);
+          transition: 0.5s;  
+          color: white;
+          border-radius: 5px;
+        }
+        a:hover{
+          text-decoration: none;
+          opacity: 0.7;      
+          color: white;    
+        }
+        textarea{
+          width: 100%;
+          margin-top: 10px;
+          border:1px solid lightgrey;
+        }
+        .notesStatus{
+          color: #21d821;
+          font-size: 10px;
+          width: 100%;
+          padding: 7px;
+          text-align: center;
+        }
+        .textUrl{
+          padding: 5px 0;
+        }
+      </style>
+        <!--<link rel="stylesheet" href="css/popup.css">-->
+
+        <!--<script src="js/lib/jquery-1.8.2.min.js"></script>-->
+        <script src="js/lib/angular.min.js"></script>
+
+        <script src="js/app/app.js"></script>
+        <script src="js/app/popup.js"></script>
+    </head>
+    <body id="popup">
+
+        <div ng-controller="PageController" style="width: 300px; padding: 10px;">
+            <div><b>Current Page : {{title}}</b></div>
+            <div class="textUrl">{{url}}</div>
+            <div>
+                <textarea id="notes" placeholder="Write notes here..." rows="3"></textarea>
+                <button ng-click="save();" id="saveNotes">Save</button><br>
+            </div>
+            <hr>
+            <div style="padding-bottom: 10px;">
+                Here you can find the all details , For details click on button
+            </div>
+            <div style="padding:  10px 0 ; text-align: right; ">
+                <a target="_black" href="showLogs.html" id="button">Click for log</a>
+            </div>
+           
+            <div class="notesStatus" id="notesStatus"></div>
+
+            <!--<p><b>Has Links:</b></p>
+            <ul>
+                <li ng-repeat="pageInfo in pageInfos">
+                    <div>{{pageInfo.url}}</div>
+                </li>                       
+            </ul>-->
+        </div>
+
+    </body>
+</html>
