@@ -47,29 +47,25 @@
         <div ng-controller="PageController" style="width: 300px; padding: 10px;">
             <div><b>Current Page : {{title}}</b></div>
             <div class="textUrl">{{url}}</div>
-            <div>
-                <textarea id="notes" placeholder="Write notes here..." rows="3"></textarea>
-                <button ng-click="save();" id="saveNotes">Save</button><br>
-            </div>
             <hr>
             <div style="padding-bottom: 10px;">
                 Here you can find the all details , For details click on button
             </div>
-            <div style="padding:  10px 0 ; text-align: right; ">
-                <a target="_black" href="showLogs.html" id="button">dashboard</a>
-            </div>
-           
-            <div class="notesStatus" id="notesStatus"></div>
-
+        </div>
+        <div style="padding:  10px 0 ; text-align: right; ">
+            <a target="_black" href="showLogs.html" id="button">dashboard</a>
+        </div>
+        <div ng-controller="insertNotesController">
+                <textarea id="notes" ng-model="notesObject.text" name="notes" placeholder="Write notes here..." rows="3"></textarea>
+                <button ng-click="saveNotes();" id="saveNotes">Save</button><br>
+        </div>
             <!--<p><b>Has Links:</b></p>
             <ul>
                 <li ng-repeat="pageInfo in pageInfos">
                     <div>{{pageInfo.url}}</div>
                 </li>                       
             </ul>-->
-
-            
-        </div>
+        
 
     </body>
 </html>
