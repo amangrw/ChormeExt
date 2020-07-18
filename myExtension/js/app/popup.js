@@ -1,24 +1,47 @@
+// chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab, change) {
+//     alert('updated from contentscript');
+//     alert(tabId);
+//     let currentUrl = tab.url;
+//     if( tab.url){
+//         alert(currentUrl);
+//     }
+//  });
+
+        chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
+            chrome.tabs.onUpdated.addListener((tabId, change, tab) => {
+                if (change.url) {
+                    alert('updated from contentscript');
+                    alert(tabId);
+                    // let currentUrl = tab.url;
+                    // if( tab.url){
+                    //     alert(currentUrl);
+                    // }
+                }
+            });
+        }); 
+
+
+
+
 myApp.service('pageInfoService', function() {
     this.getInfo = function(callback) {
         var model = {};
 
-        chrome.tabs.query({currentWindow: true, 'active': true},
-        function (tabs) {
-            //chrome.tabs.onUpdated.addListener((tabId, change, tab) => {
+        chrome.tabs.query({currentWindow: true, 'active': true}, function (tabs) {
+            
+           
                 if (tabs.length > 0)
                 {
                     model.title = tabs[0].title;
                     model.url = tabs[0].url;
-                    
-
                     chrome.tabs.sendMessage(tabs[0].id, { 'action': 'PageInfo' }, function (response) {
                         model.pageInfos = response;
                         callback(model);
                     });
                 }
-            //});
 
         });
+
     };
     
 });
@@ -41,7 +64,7 @@ myApp.controller("PageController", function ($scope, $http, pageInfoService) {
         //localStorage.setItem($scope.date, JSON.stringify($scope.dataObject));
 
         $http({
-            url: ' http://localhost:3000/urlsData',
+            url: ' http://localhost:3000/urlData',
             method: "POST",
             data: $scope.dataObject
         })
@@ -54,6 +77,9 @@ myApp.controller("PageController", function ($scope, $http, pageInfoService) {
             alert("unsuccessfull")
         });
     });
+
+    
+
 });
 
 
@@ -61,7 +87,7 @@ myApp.controller("allLogsListController", function($scope, $http){
     $scope.allLogs = [];
     $scope.load = function(){
             $http({
-                url: ' http://localhost:3000/urlsData',
+                url: ' http://localhost:3000/urlData',
                 method: "GET",
                 data: $scope.allLogs
             })
@@ -76,5 +102,37 @@ myApp.controller("allLogsListController", function($scope, $http){
         }
 
 });
+
+myApp.controller("insertNotesController", function($scope, $http, pageInfoService){
+
+    pageInfoService.getInfo(function (info) {
+        $scope.url = info.url;
+        $scope.notesObject = {
+            'url': $scope.url, 
+            'text': $scope.title
+        };
+        $scope.saveNotes = function(){
+                $http({
+                url: ' http://localhost:3000/urlNotes',
+                method: "POST",
+                data: $scope.notesObject
+                })
+                .then(function(response) {
+                    // success
+                    alert("successfull")
+                }, 
+                function(response) { // optional
+                    // failed
+                    alert("unsuccessfull")
+                });
+            }
+    });
+
+});
+
+
+
+
+
 
         
