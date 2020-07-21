@@ -7,6 +7,20 @@
 //     }
 //  });
 
+chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
+            chrome.tabs.onUpdated.addListener((tabId, change, tab) => {
+                if (change.url) {
+                    alert('updated from contentscript');
+                    alert(tabId);
+                    saveurl();
+                    // let currentUrl = tab.url;
+                    // if( tab.url){
+                        alert("currentUrl");
+                    // }
+                }
+            });
+        }); 
+
         chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
             chrome.tabs.onUpdated.addListener((tabId, change, tab) => {
                 if (change.url) {
