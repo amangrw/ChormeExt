@@ -1,0 +1,19 @@
+.suggestions{
+	z-index: 100;
+    position: absolute;
+    top: 0;
+    padding: 20px;
+}
+.suggestions .suggestions-label{
+	cursor: pointer;
+    color:#5ba4a4;
+    background-color: #ebfffe ;
+    padding: 7px;
+    border-radius: 5px;
+    border:1px solid #5ba4a4;
+}
+.suggestions .suggestions-label:hover{
+
+    color:white;
+    background-color: #5ba4a4 ;
+}
