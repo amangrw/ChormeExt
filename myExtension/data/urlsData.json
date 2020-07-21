@@ -55,7 +55,18 @@
       "id": 4
     }
   ],
-  "profile": {
-    "name": "typicode"
-  }
+  "suggestion": [
+    {
+      "id": 1,
+      "type": "Ecommerce"
+    },
+    {
+      "id": 2,
+      "type": "information"
+    },
+    {
+      "id": 3,
+      "type": "used In"
+    }
+  ]
 }
