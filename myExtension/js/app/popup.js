@@ -7,32 +7,19 @@
 //     }
 //  });
 
-chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
-            chrome.tabs.onUpdated.addListener((tabId, change, tab) => {
-                if (change.url) {
-                    alert('updated from contentscript');
-                    alert(tabId);
-                    saveurl();
-                    // let currentUrl = tab.url;
-                    // if( tab.url){
-                        alert("currentUrl");
-                    // }
-                }
-            });
-        }); 
-
-        chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
-            chrome.tabs.onUpdated.addListener((tabId, change, tab) => {
-                if (change.url) {
-                    alert('updated from contentscript');
-                    alert(tabId);
-                    // let currentUrl = tab.url;
-                    // if( tab.url){
-                    //     alert(currentUrl);
-                    // }
-                }
-            });
-        }); 
+        // chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
+        //     chrome.tabs.onUpdated.addListener((tabId, change, tab) => {
+        //         if (change.url) {
+        //             alert('updated from contentscript');
+        //             alert(tabId);
+        //             saveurl();
+        //             // let currentUrl = tab.url;
+        //             // if( tab.url){
+        //                 alert("currentUrl");
+        //             // }
+        //         }
+        //     });
+        // }); 
 
 
 
@@ -40,6 +27,20 @@ chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
 myApp.service('pageInfoService', function() {
     this.getInfo = function(callback) {
         var model = {};
+
+        chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
+            chrome.tabs.onUpdated.addListener((tabId, change, tab) => {
+                if (change.url) {
+                    //alert('updated from contentscript');
+                    //alert(tabId);
+                    saveurl();
+                    // let currentUrl = tab.url;
+                    // if( tab.url){
+                        //alert("currentUrl");
+                    // }
+                }
+            });
+        }); 
 
         chrome.tabs.query({currentWindow: true, 'active': true}, function (tabs) {
             
@@ -60,6 +61,8 @@ myApp.service('pageInfoService', function() {
     
 });
 
+
+
 myApp.controller("PageController", function ($scope, $http, pageInfoService) {
 
     pageInfoService.getInfo(function (info) {
@@ -77,19 +80,24 @@ myApp.controller("PageController", function ($scope, $http, pageInfoService) {
         };
         //localStorage.setItem($scope.date, JSON.stringify($scope.dataObject));
 
-        $http({
-            url: ' http://localhost:3000/urlData',
-            method: "POST",
-            data: $scope.dataObject
-        })
-        .then(function(response) {
-            // success
-            //alert("successfull")
-        }, 
-        function(response) { // optional
-            // failed
-            alert("unsuccessfull")
-        });
+        $scope.saveurl = function(){
+            //alert("i am in")
+        }
+        //$scope.saveurl = function(){
+                $http({
+                url: ' http://localhost:3000/urlData',
+                method: "POST",
+                data: $scope.dataObject
+            })
+            .then(function(response) {
+                // success
+                //alert("successfull")
+            }, 
+            function(response) { // optional
+                // failed
+                alert("unsuccessfull")
+            });
+        //}
     });
 
     
@@ -133,7 +141,7 @@ myApp.controller("insertNotesController", function($scope, $http, pageInfoServic
                 })
                 .then(function(response) {
                     // success
-                    alert("successfull")
+                    alert("saved")
                 }, 
                 function(response) { // optional
                     // failed
@@ -143,6 +151,8 @@ myApp.controller("insertNotesController", function($scope, $http, pageInfoServic
     });
 
 });
+
+
 
 
 
