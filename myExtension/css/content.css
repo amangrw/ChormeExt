@@ -1,7 +1,5 @@
 .suggestions{
 	z-index: 100;
-    position: absolute;
-    top: 0;
     padding: 20px;
 }
 .suggestions .suggestions-label{
