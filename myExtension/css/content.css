@@ -1,12 +1,12 @@
 .suggestions{
 	z-index: 100;
-    padding: 20px;
+    padding-top: 10px;
 }
-.suggestions .suggestions-label{
+.suggestions-label{
 	cursor: pointer;
     color:#5ba4a4;
     background-color: #ebfffe ;
-    padding: 7px;
+    padding: 5px;
     border-radius: 5px;
     border:1px solid #5ba4a4;
 }
