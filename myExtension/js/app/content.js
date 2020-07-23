@@ -31,12 +31,20 @@
 // var body = document.getElementByTagName('body');
 // body.innerHTML = "<button>click</button>"
 
-var div=document.createElement("div"); 
-document.getElementsByClassName("result")[0].appendChild(div);
-document.querySelector(".result").appendChild(div);
+//var div=document.createElement("div"); 
+//var result = document.getElementsByClassName("result");
+//document.querySelector(".result").appendChild(div);
 //document.getElementsByClassName("result").appendChild(div);
-div.innerHTML="<div ng-app='myExtension' ng-csp><div class='suggestions' ng-controller='suggestionController'><div ng-repeat='suggestion in suggestions'><label class='suggestions-label'>e-commerce</label></div></div></div>";
+//div.innerHTML="<div ng-app='myExtension' ng-csp><div class='suggestions' ng-controller='suggestionController'><div ng-repeat='suggestion in suggestions'><label class='suggestions-label'>e-commerce</label></div></div></div>";
 
+
+var result = document.getElementsByClassName("result");
+
+for (var i = 0; i < result.length; i++) {
+	var div=document.createElement("div"); 
+	div.innerHTML="<div class='suggestions'><label class='suggestions-label'>e-commerce</label></div>";
+	result[i].appendChild(div);
+}
 
   // var node = document.createElement("div");
   // var textnode = document.createTextNode("Water");
@@ -55,10 +63,11 @@ myApp.controller("suggestionController", function($scope, $http){
             .then(function(response) {
                 // success
                 $scope.suggestions = response.data;
+                alert("hi");
             }, 
             function(response) { // optional
                 // failed
                 alert("unsuccessfull")
             });
         }
-});
+})
