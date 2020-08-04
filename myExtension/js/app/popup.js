@@ -70,7 +70,6 @@ myApp.controller("allLogsListController", function($scope, $http){
             }, 
             function(response) { // optional
                 // failed
-                alert("unsuccessfull")
             });
         }
 
@@ -92,11 +91,9 @@ myApp.controller("insertNotesController", function($scope, $http, pageInfoServic
                 })
                 .then(function(response) {
                     // success
-                    alert("saved")
                 }, 
                 function(response) { // optional
                     // failed
-                    alert("unsuccessfull")
                 });
             }
     });
