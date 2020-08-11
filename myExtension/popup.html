@@ -100,6 +100,8 @@
               {{url}}
             </div>
         </div>
+
+        
         <div style="padding: 15px;">
           <div class="insert-notes" ng-controller="insertNotesController">
                   <span>Write note for current page:</span>
@@ -107,19 +109,19 @@
                   <button class="btnclass" ng-click="saveNotes();" id="saveNotes">Save Note</button><br>
           </div>
 
-          <div class="to-do-list">
+          <div class="to-do-list" ng-controller="insertToDoListController">
             <span>Task : </span>
-            <input type="text" name="">
+            <input type="text" ng-model="data.task" name="" placeholder="ex. marketing videos">
             <span>amount Done (as percentage) : </span>
-            <input type="text" name="">
+            <input type="text" ng-model="data.completedWork" name="" placeholder="ex. 50">
             <div style=" text-align: right; ">
-              <button class="btnclass">Submit</button>
+              <button class="btnclass" ng-click="inertToDoList()">Submit</button>
             </div>
           </div>
 
-            <div style="margin-top: 15px;">
+            <div style="margin-top: 15px;" ng-controller="taskController">
               <a target="_black" href="showLogs.html" >Go To Dashboard</a>
-              <button class="btnclass">Watch To-Do list</button>
+              <button class="btnclass " ng-click="validTask()">Check Task</button>
             </div>
 
 
