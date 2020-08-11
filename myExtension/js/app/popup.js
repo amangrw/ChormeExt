@@ -19,9 +19,52 @@ myApp.service('pageInfoService', function() {
     
 });
 
+myApp.service('baseURLService', function() {
+  return {
+      baseURl : 'http://localhost:3000/',
+      websiteCategorizationApi : 'https://website-categorization.whoisxmlapi.com/api/v1?apiKey=at_zs6tishK2xEXWG5TdY1uy7htcOPS3&domainName='
+  };
+});
 
 // collecting and saving the the data
-myApp.controller("PageController", function ($scope, $http, pageInfoService) {
+myApp.controller("taskController", function ($scope, $http, pageInfoService, baseURLService) {
+
+    pageInfoService.getInfo(function (info) {
+        $scope.title = info.title;
+        $scope.url = info.url;
+
+        $scope.getDataByApi = [];
+        $scope.validTask = function(){
+            $http({
+                url: baseURLService.websiteCategorizationApi + $scope.url,
+                method: "GET",
+                data: $scope.getDataByApi
+            })
+            .then(function(response) {
+                // success
+                var  getData = response.data.categories;
+                $scope.getDataByApi = getData;
+                console.log(getData);
+                // console.log(getData);
+                // for (var i=0; i <= getData.length; i++) {
+                //      $scope.getDataByApi[i]= getData[i]
+                //     console.log($scope.getDataByApi)
+                // }
+            }, 
+            function(response) { // optional
+                // failed
+                alert(url)
+            });
+        }
+
+    });
+
+    
+
+}); 
+
+// collecting and saving the the data
+myApp.controller("PageController", function ($scope, $http, pageInfoService, baseURLService) {
 
     pageInfoService.getInfo(function (info) {
         $scope.title = info.title;
@@ -39,7 +82,7 @@ myApp.controller("PageController", function ($scope, $http, pageInfoService) {
         //localStorage.setItem($scope.date, JSON.stringify($scope.dataObject));
 
         $http({
-            url: ' http://localhost:3000/urlData',
+            url: baseURLService.baseURl +'urlData',
             method: "POST",
             data: $scope.dataObject
         })
@@ -56,11 +99,12 @@ myApp.controller("PageController", function ($scope, $http, pageInfoService) {
 });
 
 // showing the logs
-myApp.controller("allLogsListController", function($scope, $http){
+myApp.controller("showDataController", function($scope, $http, baseURLService){
     $scope.allLogs = [];
+    $scope.toDoList = [];
     $scope.load = function(){
             $http({
-                url: ' http://localhost:3000/urlData',
+                url: baseURLService.baseURl +'urlData',
                 method: "GET",
                 data: $scope.allLogs
             })
@@ -69,9 +113,27 @@ myApp.controller("allLogsListController", function($scope, $http){
                 $scope.allLogs = response.data;
             }, 
             function(response) { // optional
+                alert("server is not connected")
                 // failed
             });
         }
+
+    $scope.toDoList = function(){
+        $http({
+        url: baseURLService.baseURl +'toDoList',
+        method: "GET",
+        data: $scope.toDoList
+        })
+        .then(function(response) {
+            // success
+            $scope.toDoList = response.data;
+            alert(toDoList)
+        }, 
+        function(response) { // optional
+            // failed
+            alert("server is not connected")
+        });
+    }
 
 });
 
@@ -99,3 +161,25 @@ myApp.controller("insertNotesController", function($scope, $http, pageInfoServic
     });
 
 });
+
+myApp.controller("insertToDoListController", function($scope, $http){
+    $scope.data = {};
+        $scope.inertToDoList = function(){
+                $http({
+                url: ' http://localhost:3000/toDoList',
+                method: "POST",
+                data: $scope.data
+                })
+                .then(function(response) {
+                    // success
+                    alert("created")
+                }, 
+                function(response) { // optional
+                    // failed
+                    alert("server is not connected")
+                });
+            }
+
+});
+
+
