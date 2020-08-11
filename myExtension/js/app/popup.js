@@ -33,28 +33,50 @@ myApp.controller("taskController", function ($scope, $http, pageInfoService, bas
         $scope.title = info.title;
         $scope.url = info.url;
 
-        $scope.getDataByApi = [];
+        $scope.getDataBy+Api = [];
+        $scope.toDoList = [];
         $scope.validTask = function(){
             $http({
                 url: baseURLService.websiteCategorizationApi + $scope.url,
                 method: "GET",
                 data: $scope.getDataByApi
             })
-            .then(function(response) {
-                // success
-                var  getData = response.data.categories;
-                $scope.getDataByApi = getData;
-                console.log(getData);
-                // console.log(getData);
-                // for (var i=0; i <= getData.length; i++) {
-                //      $scope.getDataByApi[i]= getData[i]
-                //     console.log($scope.getDataByApi)
-                // }
+            .then(function(response) {// success
+                $scope.getDataByApi = response.data.categories;
+                console.log($scope.getDataByApi);
             }, 
-            function(response) { // optional
-                // failed
-                alert(url)
+            function(response) { // optional unsuccessful
+                alert("API not responding")
             });
+
+            //fetching the whole task title
+            $http({
+                url: baseURLService.baseURl +'toDoList',
+                method: "GET",
+                data: $scope.toDoList
+                })
+                .then(function(response) {// success
+                    var toDoListData = response.data;
+                    for (var i = 0; i < toDoListData.length; i++) {
+                        $scope.toDoList[i] = toDoListData[i].task;
+                        //console.log(data);
+                    }
+                    //alert($scope.toDoList)
+                    console.log($scope.toDoList.length)
+                }, 
+                function(response) { // optional
+                    // failed
+                    alert("server is not connected")
+                });
+
+                alert($scope.getDataByApi.length);
+                alert($scope.toDoList.length)
+
+                if($scope.getDataByApi.length > 0 && $scope.toDoList.length > 0){
+                    alert("aman")
+                    console.log($scope.getDataByApi.length);
+                    console.log($scope.toDoList.length)
+                }
         }
 
     });
@@ -138,7 +160,7 @@ myApp.controller("showDataController", function($scope, $http, baseURLService){
 });
 
 // saving the text notes for each urls
-myApp.controller("insertNotesController", function($scope, $http, pageInfoService){
+myApp.controller("insertNotesController", function($scope, $http, pageInfoService, baseURLService){
     pageInfoService.getInfo(function (info) {
         $scope.url = info.url;
         $scope.notesObject = {
@@ -147,7 +169,7 @@ myApp.controller("insertNotesController", function($scope, $http, pageInfoServic
         };
         $scope.saveNotes = function(){
                 $http({
-                url: ' http://localhost:3000/urlNotes',
+                url:  baseURLService.baseURl + 'urlNotes',
                 method: "POST",
                 data: $scope.notesObject
                 })
@@ -162,11 +184,11 @@ myApp.controller("insertNotesController", function($scope, $http, pageInfoServic
 
 });
 
-myApp.controller("insertToDoListController", function($scope, $http){
+myApp.controller("insertToDoListController", function($scope, $http, baseURLService){
     $scope.data = {};
         $scope.inertToDoList = function(){
                 $http({
-                url: ' http://localhost:3000/toDoList',
+                url:  baseURLService.baseURl+'toDoList',
                 method: "POST",
                 data: $scope.data
                 })
