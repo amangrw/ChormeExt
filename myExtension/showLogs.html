@@ -7,7 +7,7 @@
       		color: grey;
       	}
         table tbody tr td{
-          width: 50%;
+          width: 200px;
           word-wrap: break-word;
           border-bottom: 1px solid lightgrey;
           padding: 7px;
@@ -29,9 +29,10 @@
         <script src="js/app/popup.js"></script>
     </head>
     <body id="popup">
-        <div ng-controller="allLogsListController">
+        <div ng-controller="showDataController">
             <button ng-click ="load();">show all Logs</button>
-            <table>
+            <button ng-click ="toDoList();">Show Task</button>
+            <table width="100%">
             	<thead>
 	                <tr>
 	                    <td>url</td>
@@ -49,6 +50,14 @@
 	                </tr>
             	</tbody>
             </table>
+
+
+            <div ng-repeat ="data in toDoList">
+              <p>{{data.task}} ( {{data.completedWork}} % )</p>
+              <div style="width: 100%; height: 10px; background-color: lightgrey">
+                <div style="width: {{data.completedWork}}%; height: 10px; background-color: #48d848; z-index: 1;"></div>
+              </div>
+            </div>
         </div>
 
     </body>
