@@ -119,9 +119,11 @@
             </div>
           </div>
 
-            <div style="margin-top: 15px;" ng-controller="taskController">
-              <a target="_black" href="showLogs.html" >Go To Dashboard</a>
-              <button class="btnclass " ng-click="validTask()">Check Task</button>
+            <div style="margin-top: 15px;" ng-controller="taskController" data-ng-init="validTask()">
+              <!--<div ng-init="validTask()">-->
+                <a target="_black" href="showLogs.html" >Go To Dashboard</a>
+                <button class="btnclass " ng-click="checkCondition()">check website</button>
+              <!--</div>-->
             </div>
 
 
