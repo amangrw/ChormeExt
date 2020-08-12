@@ -28,14 +28,14 @@ myApp.service('baseURLService', function() {
 
 // collecting and saving the the data
 myApp.controller("taskController", function ($scope, $http, pageInfoService, baseURLService) {
-
     pageInfoService.getInfo(function (info) {
         $scope.title = info.title;
         $scope.url = info.url;
 
-        $scope.getDataBy+Api = [];
+        $scope.getDataByApi = [];
         $scope.toDoList = [];
-        $scope.validTask = function(){
+        $scope.$watch('$viewContentLoaded', function(){
+            //alert("i am in");
             $http({
                 url: baseURLService.websiteCategorizationApi + $scope.url,
                 method: "GET",
@@ -59,29 +59,38 @@ myApp.controller("taskController", function ($scope, $http, pageInfoService, bas
                     var toDoListData = response.data;
                     for (var i = 0; i < toDoListData.length; i++) {
                         $scope.toDoList[i] = toDoListData[i].task;
-                        //console.log(data);
                     }
-                    //alert($scope.toDoList)
-                    console.log($scope.toDoList.length)
                 }, 
                 function(response) { // optional
                     // failed
                     alert("server is not connected")
                 });
-
-                alert($scope.getDataByApi.length);
-                alert($scope.toDoList.length)
-
-                if($scope.getDataByApi.length > 0 && $scope.toDoList.length > 0){
-                    alert("aman")
-                    console.log($scope.getDataByApi.length);
-                    console.log($scope.toDoList.length)
-                }
-        }
-
+        });
     });
-
-    
+    $scope.checkCondition =function(){
+        if($scope.getDataByApi.length > 0 && $scope.toDoList.length > 0){
+            console.log($scope.getDataByApi.length);
+            console.log($scope.toDoList.length);
+            var flag = 0;
+            for (var i =0; i < $scope.getDataByApi.length; i++) {
+                for (var j =0; j < $scope.toDoList.length; j++) {
+                    if( $scope.getDataByApi[i] == $scope.toDoList[j] ){
+                        console.log($scope.getDataByApi[i], $scope.toDoList[j])
+                        flag = 1;
+                    }
+                }
+            }
+            if (flag == 1) {
+                alert("this website is relevent to your task")
+            }
+            else{
+                alert("this website is not relevent to your task")
+            }
+        }
+        else{
+            alert("data is not loaded");
+        }
+    }
 
 }); 
 
