@@ -12,11 +12,8 @@ myApp.service('pageInfoService', function() {
                         callback(model);
                     });
                 }
-
         });
-
     };
-    
 });
 
 myApp.service('baseURLService', function() {
@@ -28,6 +25,7 @@ myApp.service('baseURLService', function() {
 
 // collecting and saving the the data
 myApp.controller("taskController", function ($scope, $http, pageInfoService, baseURLService) {
+
     pageInfoService.getInfo(function (info) {
         $scope.title = info.title;
         $scope.url = info.url;
@@ -133,6 +131,19 @@ myApp.controller("PageController", function ($scope, $http, pageInfoService, bas
 myApp.controller("showDataController", function($scope, $http, baseURLService){
     $scope.allLogs = [];
     $scope.toDoList = [];
+
+    $scope.tab = 1;
+
+    $scope.setTab = function(newTab){
+      $scope.tab = newTab;
+      $scope.load();
+      $scope.toDoList();
+    };
+
+    $scope.isSet = function(tabNum){
+      return $scope.tab === tabNum;
+    };
+    
     $scope.load = function(){
             $http({
                 url: baseURLService.baseURl +'urlData',
@@ -158,7 +169,6 @@ myApp.controller("showDataController", function($scope, $http, baseURLService){
         .then(function(response) {
             // success
             $scope.toDoList = response.data;
-            alert(toDoList)
         }, 
         function(response) { // optional
             // failed
@@ -167,6 +177,7 @@ myApp.controller("showDataController", function($scope, $http, baseURLService){
     }
 
 });
+
 
 // saving the text notes for each urls
 myApp.controller("insertNotesController", function($scope, $http, pageInfoService, baseURLService){
