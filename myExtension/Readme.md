@@ -26,3 +26,28 @@
 	--> Go To Data directory on our extension.
 	--> Run this command 'json-server urlsData.json'.
 	--> Now extension is able to take responce.
+	
+	
+6. File structure
+	-->myExtension
+		|-->css
+		|    |-->content.css
+		|    |-->popup.css
+		|-->data
+		|    |-->urlsData.json
+		|-->img
+		|    |-->defaultIcon19x19.png
+		|    |-->logo.png
+		|-->js
+		|    |-->app
+		|        |-->app.js
+		|	|-->content.js
+		|	|-->popup.js
+		|    |-->lib
+		|    	|-->angular.min.js
+		|	|-->jquery-1.8.2.min.js
+		|-->Icon128.png
+		|-->manifest.json
+		|-->popup.html
+		|-->Readme.md
+		|-->showLogs.html
