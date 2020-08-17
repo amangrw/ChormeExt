@@ -20,4 +20,9 @@
 		--> You can check your all Tasks with completed percentage (through Dashboard ).
 
 	
-
+5. Run Local server
+	--> Download Node js and install in your system.
+	--> Open cmd Prompt or shell in your System.
+	--> Go To Data directory on our extension.
+	--> Run this command 'json-server urlsData.json'.
+	--> Now extension is able to take responce.
