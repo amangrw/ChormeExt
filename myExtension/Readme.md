@@ -8,8 +8,9 @@
 
 		--> This extension save your all brower activity.
 		--> you can write the notes for every url.
-		-->	you can create your task .
-		--> extension can find that the current url is related to your task or not.
+		--> you can create your task .
+		--> Extension can find that the current url is related to your task or not.
+		--> Extension can catagories the all url (feature is available on "ecosia.org")
 
 	--> In this Extension popup you can see the follwing details:
 
