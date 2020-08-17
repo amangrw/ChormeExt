@@ -13,10 +13,10 @@
 
 	--> In this Extension popup you can see the follwing details:
 
-		-->Current Detailed Url.
-		-->Title or search term.
-		-->All Logs with date and time (through Dashboard ).
-		-->You can check your all Tasks with completed percentage (through Dashboard ).
+		--> Current Detailed Url.
+		--> Title or search term.
+		--> All Logs with date and time (through Dashboard ).
+		--> You can check your all Tasks with completed percentage (through Dashboard ).
 
 	
 
