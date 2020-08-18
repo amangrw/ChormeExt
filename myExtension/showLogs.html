@@ -7,11 +7,12 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    	<style type="text/css">
-      	*{
-      		font-size: 12px;
-      		color: grey;
-      	}
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <style type="text/css">
+        *{
+          font-size: 12px;
+          color: grey;
+        }
         table tbody tr td{
           border-bottom: 1px solid lightgrey;
           padding: 15px 15px 15px 0 ;
@@ -24,8 +25,8 @@
         .url, .title{
           max-width: 200px;
           white-space: nowrap;
-    		  overflow: hidden;
-    		  text-overflow: ellipsis;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         body {
           margin: 15px;
@@ -57,62 +58,75 @@
     </head>
     <body id="popup">
         <div ng-controller="showDataController">                        
-        <div class="container">
-          <div class="row" >
-            <div class="col-md-2">
-              <ul class="nav-pills">
-                <li ng-class="{ active: isSet(1) }" ng-click="setTab(1)">
-                    Home
-                </li>
-                <li ng-class="{ active: isSet(2) }" ng-click="setTab(2)">
-                    All Logs
-                </li>
-                <li ng-class="{ active: isSet(3) }" ng-click="setTab(3)">
-                    All Tasks
-                </li>
-              </ul>
-            </div>
-            <div class="col-md-10">
-              <div class="jumbotron" style="background-color: #fcfcfc;">
-                <div ng-show="isSet(1)">
-                   <h1>Home page</h1>
-                    <p>Welcome to the website!</p>
-                   <p><a class="btn btn-primary btn-lg"       role="button">Learn more</a></p>
-                  </div>
-              <div ng-show="isSet(2)">
-                  <h1>All Logs</h1>
-                  <table width="100%">
-                      <thead>
-                          <tr>
-                              <th>URLs</th>
-                              <th>Date and Time</th>
-                              <th>Title/ Search Term</th>
-                              <th>tabID</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr ng-repeat ="allLog in allLogs">
-                              <td  class="url" title="{{ allLog.url}}">
-                                <a href="{{ allLog.url}}">{{ allLog.url}}</a>
-                              </td>
-                              <td >{{allLog.time}}</td>
-                              <td class="title" title="{{allLog.title}}">{{allLog.title}}</td>
-                              <td>{{allLog.tabId}}</td>
-                          </tr>
-                      </tbody>
-                    </table>
+            <div class="container">
+            <div class="row" >
+              <div class="col-md-2">
+                <ul class="nav-pills">
+                  <li ng-class="{ active: isSet(1) }" ng-click="setTab(1)">
+                      Home
+                  </li>
+                  <li ng-class="{ active: isSet(2) }" ng-click="setTab(2)">
+                      All Logs
+                  </li>
+                  <li ng-class="{ active: isSet(3) }" ng-click="setTab(3)">
+                      All Tasks
+                  </li>
+                </ul>
               </div>
-                <div ng-show="isSet(3)">
-                  <h1>All Tasks</h1>
-                  <div ng-repeat ="data in toDoList" style="margin-bottom: 15px;">
-                      <p>{{data.task}} ( {{data.completedWork}} % )</p>
-                      <div style="width: 100%; height: 10px; background-color: lightgrey">
-                        <div style="width: {{data.completedWork}}%; height: 10px; background-color: #48d848; z-index: 1;"></div>
-                      </div>
+              <div class="col-md-10">
+                <div >
+                  <div ng-show="isSet(1)" class="jumbotron" style="background-color: #fcfcfc;">
+                     <h1>Home page</h1>
+                      <p>Welcome to the website!</p>
+                     <p><a class="btn btn-primary btn-lg"       role="button">Learn more</a></p>
                     </div>
+                <div ng-show="isSet(2)" class="jumbotron" style="background-color: #fcfcfc;">
+                    <h1>All Logs</h1>
+                    <table width="100%">
+                        <thead>
+                            <tr>
+                                <th>URLs</th>
+                                <th>Date and Time</th>
+                                <th>Title/ Search Term</th>
+                                <th>tabID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat ="allLog in allLogs">
+                                <td  class="url" title="{{ allLog.url}}">
+                                  <a href="{{ allLog.url}}">{{ allLog.url}}</a>
+                                </td>
+                                <td >{{allLog.time}}</td>
+                                <td class="title" title="{{allLog.title}}">{{allLog.title}}</td>
+                                <td>{{allLog.tabId}}</td>
+                            </tr>
+                        </tbody>
+                      </table>
+                </div>
+                  <div ng-show="isSet(3)">
+                    <div class="jumbotron" style="padding: 10px; margin-bottom: 15px; background-color: #fcfcfc;">
+                        <h1>All Tasks</h1>
+                    </div>
+                    <div ng-repeat ="data in toDoList"  class="jumbotron" style="padding: 15px; margin-bottom: 15px; background-color: #fcfcfc;">
+                      <div class="row">
+                        <div class="col-md-6">
+                            <p>{{data.task}} ( {{data.completedWork}} % )</p>
+                        </div>
+                        <div class="col-md-6" style="text-align: right;">
+                          <span style="cursor: pointer;" id="{{data.id}}" ng-click="deleteTask(data.id)">
+                            <i class="fa fa-trash-o"  style="color:red;margin-right: 20px;font-size: 20px;"></i>
+                          </span>
+                        </div>
+                      </div>
+                        <div style="width: 100%; height: 4px; background-color: lightgrey">
+                          <div style="width: {{data.completedWork}}%; height: 4px; background-color: #48d848; z-index: 1;"></div>
+                        </div>
+                      </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+    </div>
     </body>
 </html>
