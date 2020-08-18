@@ -134,15 +134,21 @@ myApp.controller("showDataController", function($scope, $http, baseURLService){
 
     $scope.tab = 1;
 
-    $scope.setTab = function(newTab){
-      $scope.tab = newTab;
-      $scope.load();
-      $scope.toDoList();
-    };
-
-    $scope.isSet = function(tabNum){
-      return $scope.tab === tabNum;
-    };
+    $scope.showToDoList = function(){
+        $http({
+        url: baseURLService.baseURl +'toDoList',
+        method: "GET",
+        data: $scope.toDoList
+        })
+        .then(function(response) {
+            // success
+            $scope.toDoList = response.data;
+        }, 
+        function(response) { // optional
+            // failed
+            alert("server is not connected")
+        });
+    }
     
     $scope.load = function(){
             $http({
@@ -160,21 +166,29 @@ myApp.controller("showDataController", function($scope, $http, baseURLService){
             });
         }
 
-    $scope.toDoList = function(){
-        $http({
-        url: baseURLService.baseURl +'toDoList',
-        method: "GET",
-        data: $scope.toDoList
-        })
-        .then(function(response) {
-            // success
-            $scope.toDoList = response.data;
-        }, 
-        function(response) { // optional
-            // failed
-            alert("server is not connected")
-        });
+    $scope.deleteTask = function(id){
+        $http.delete(baseURLService.baseURl+'toDoList/'+id)
+            .then(function(response) {
+                // success
+                alert("Task Deleted");
+                $scope.showToDoList();
+            }, 
+            function(response) { // optional
+                // failed
+                alert("server is not connected")
+            });
     }
+    
+    $scope.setTab = function(newTab){
+      $scope.tab = newTab;
+       $scope.showToDoList()
+      $scope.load()
+    };
+
+    $scope.isSet = function(tabNum){
+      return $scope.tab === tabNum;
+    };
+    
 
 });
 
