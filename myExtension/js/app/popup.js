@@ -131,6 +131,7 @@ myApp.controller("PageController", function ($scope, $http, pageInfoService, bas
 myApp.controller("showDataController", function($scope, $http, baseURLService){
     $scope.allLogs = [];
     $scope.toDoList = [];
+    $scope.allNotes = [];
 
     $scope.tab = 1;
 
@@ -143,6 +144,22 @@ myApp.controller("showDataController", function($scope, $http, baseURLService){
         .then(function(response) {
             // success
             $scope.toDoList = response.data;
+        }, 
+        function(response) { // optional
+            // failed
+            alert("server is not connected")
+        });
+    }
+
+    $scope.showNotes = function(){
+        $http({
+        url: baseURLService.baseURl +'urlNotes',
+        method: "GET",
+        data: $scope.allNotes
+        })
+        .then(function(response) {
+            // success
+            $scope.allNotes = response.data;
         }, 
         function(response) { // optional
             // failed
@@ -180,9 +197,10 @@ myApp.controller("showDataController", function($scope, $http, baseURLService){
     }
     
     $scope.setTab = function(newTab){
-      $scope.tab = newTab;
-       $scope.showToDoList()
-      $scope.load()
+        $scope.tab = newTab;
+        $scope.showToDoList()
+        $scope.load()
+        $scope.showNotes()
     };
 
     $scope.isSet = function(tabNum){
