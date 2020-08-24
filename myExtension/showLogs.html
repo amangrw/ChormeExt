@@ -71,6 +71,9 @@
                   <li ng-class="{ active: isSet(3) }" ng-click="setTab(3)">
                       All Tasks
                   </li>
+                  <li ng-class="{ active: isSet(4) }" ng-click="setTab(4)">
+                      All Notes
+                  </li>
                 </ul>
               </div>
               <div class="col-md-10">
@@ -123,6 +126,29 @@
                         </div>
                       </div>
                 </div>
+
+                  <div ng-show="isSet(4)" class="jumbotron" style="background-color: #fcfcfc;">
+                     <h1>All Notes</h1>
+                     <div >
+                      <table width="100%">
+                        <thead>
+                            <tr>
+                              <th>Urls</th>
+                              <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="data in allNotes">
+                                <td  class="url" title="{{data.url}}">
+                                  <a href="{{data.url}}">{{data.url}}</a>
+                                </td>
+                                <td >{{data.text}}</td>
+                            </tr>
+                        </tbody>
+                      </table>
+                     </div>
+                  </div>
+
               </div>
             </div>
           </div>
